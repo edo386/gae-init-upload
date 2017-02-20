@@ -4,6 +4,7 @@ from __future__ import absolute_import
 
 import hashlib
 
+from flask_babel import lazy_gettext as _
 from google.appengine.ext import ndb
 from webargs.flaskparser import parser
 from webargs import fields as wf
@@ -15,14 +16,15 @@ import config
 
 
 class User(model.Base):
-  name = ndb.StringProperty(required=True)
-  username = ndb.StringProperty(required=True)
-  email = ndb.StringProperty(default='')
+  name = ndb.StringProperty(required=True, verbose_name=_('Name'))
+  username = ndb.StringProperty(required=True, verbose_name=_('Username'))
+  email = ndb.StringProperty(default='', verbose_name=_('Email'))
+  locale = ndb.StringProperty(default='', verbose_name=_('Language'))
   auth_ids = ndb.StringProperty(repeated=True)
-  active = ndb.BooleanProperty(default=True)
-  admin = ndb.BooleanProperty(default=False)
-  permissions = ndb.StringProperty(repeated=True)
-  verified = ndb.BooleanProperty(default=False)
+  active = ndb.BooleanProperty(default=True, verbose_name=_('Active'))
+  admin = ndb.BooleanProperty(default=False, verbose_name=_('Admin'))
+  permissions = ndb.StringProperty(repeated=True, verbose_name=_('Permissions'))
+  verified = ndb.BooleanProperty(default=False, verbose_name=_('Verified'))
   token = ndb.StringProperty(default='')
   password_hash = ndb.StringProperty(default='')
 
@@ -81,6 +83,7 @@ class User(model.Base):
     'auth_ids': fields.List(fields.String),
     'avatar_url': fields.String,
     'email': fields.String,
+    'locale': fields.String,
     'name': fields.String,
     'permissions': fields.List(fields.String),
     'username': fields.String,

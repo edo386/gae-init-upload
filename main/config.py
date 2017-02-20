@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import os
+import operator
 
 PRODUCTION = os.environ.get('SERVER_SOFTWARE', '').startswith('Google App Eng')
 DEBUG = DEVELOPMENT = not PRODUCTION
@@ -35,7 +36,27 @@ else:
   RECAPTCHA_PUBLIC_KEY = CONFIG_DB.recaptcha_public_key
   RECAPTCHA_PRIVATE_KEY = CONFIG_DB.recaptcha_private_key
   RECAPTCHA_LIMIT = 8
+  LOCALE_DEFAULT = CONFIG_DB.locale
 
 DEFAULT_DB_LIMIT = 64
 SIGNIN_RETRY_LIMIT = 4
 TAG_SEPARATOR = ' '
+
+
+###############################################################################
+# i18n Stuff
+###############################################################################
+
+# Languages: http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+# Countries: http://en.wikipedia.org/wiki/ISO_3166-1
+# To Add/Modify languages use one of the filenames in: libx/babel/localedata/
+# Examples with country included: en_GB, ru_RU, de_CH
+LOCALE = {
+  'en': u'English',
+  'el': u'Ελληνικά',
+  'pl': u'Polski',
+  'ru': u'Русский',
+}
+
+LOCALE_SORTED = sorted(LOCALE.iteritems(), key=operator.itemgetter(1))
+LANGUAGES = [l.lower().replace('_', '-') for l in LOCALE.keys()]

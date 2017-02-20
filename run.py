@@ -14,6 +14,7 @@ import urllib
 import urllib2
 
 import main
+from main import config
 
 
 ###############################################################################
@@ -39,6 +40,21 @@ PARSER.add_argument(
 PARSER.add_argument(
   '--appserver-args', dest='args', nargs=argparse.REMAINDER, default=[],
   help='all following args are passed to dev_appserver.py',
+)
+PARSER.add_argument(
+  '-i', '--pybabel-init', dest='pybabel_init', action='store_true',
+  help='''create new message catalogs from messages.pot that are defined
+  in config.py and still not present (pybabel init..)''',
+)
+PARSER.add_argument(
+  '-u', '--pybabel-update', dest='pybabel_update', action='store_true',
+  help='''extracts messages from source files to generate messages.pot
+  (pybabel extract..), updates existing catalogs (pybabel update..) and
+  compiles message catalogs to MO files (pybable compile)''',
+)
+PARSER.add_argument(
+  '-l', '--pybabel-init-locale', dest='pybabel_locale', action='store',
+  help='create new message catalogs from messages.pot (pybabel init..)',
 )
 PARSER.add_argument(
   '-v', '--version', dest='show_version', action='store_true',
@@ -74,6 +90,10 @@ FILE_VENV = os.path.join(DIR_VENV, 'Scripts', 'activate.bat') \
 
 DIR_STORAGE = os.path.join(DIR_TEMP, 'storage')
 FILE_UPDATE = os.path.join(DIR_TEMP, 'update.json')
+
+DIR_TRANSLATIONS = os.path.join(DIR_MAIN, 'translations')
+FILE_BABEL_CFG = os.path.join(DIR_TRANSLATIONS, 'babel.cfg')
+FILE_MESSAGES_POT = os.path.join(DIR_TRANSLATIONS, 'messages.pot')
 
 
 ###############################################################################
@@ -335,6 +355,41 @@ def doctor_says_ok():
 
 
 ###############################################################################
+# Babel Stuff
+###############################################################################
+def pybabel_extract():
+  exec_pip_commands(
+    '"pybabel" extract -k _ -k __ -F %s --sort-by-file --omit-header -o %s %s' % (
+      FILE_BABEL_CFG, FILE_MESSAGES_POT, DIR_MAIN,
+  ))
+
+
+def pybabel_update():
+  exec_pip_commands('"pybabel" update -i %s -d %s --no-wrap' % (
+    FILE_MESSAGES_POT, DIR_TRANSLATIONS,
+  ))
+
+
+def pybabel_init(locale):
+  exec_pip_commands('"pybabel" init -i %s -d %s -l %s' % (
+    FILE_MESSAGES_POT, DIR_TRANSLATIONS, locale,
+  ))
+
+
+def pybabel_init_missing():
+  if not os.path.exists(FILE_MESSAGES_POT):
+    pybabel_extract()
+  for locale in config.LOCALE:
+    msg = os.path.join(DIR_TRANSLATIONS, locale, 'LC_MESSAGES', 'messages.po')
+    if not os.path.exists(msg):
+      pybabel_init(locale)
+
+
+def pybabel_compile():
+  exec_pip_commands('"pybabel" compile -f -d %s' % (DIR_TRANSLATIONS))
+
+
+###############################################################################
 # Main
 ###############################################################################
 def run_start():
@@ -362,6 +417,18 @@ def run():
   if doctor_says_ok():
     install_dependencies()
     check_for_update()
+
+  if ARGS.pybabel_init:
+    pybabel_init_missing()
+
+  if ARGS.pybabel_update:
+    pybabel_extract()
+    pybabel_init_missing()
+    pybabel_update()
+    pybabel_compile()
+
+  if ARGS.pybabel_locale:
+    pybabel_init(ARGS.pybabel_locale)
 
   if ARGS.show_version:
     print_out_update(force_show=True)

@@ -6,7 +6,7 @@
 # block content
   <div class="page-header">
     <h1>
-      {{utils.back_link('Back to user list', 'user_list', order='-modified')}}
+      {{utils.back_link(_('Back to user list'), 'user_list', order='-modified')}}
       {{title}}
     </h1>
   </div>
@@ -16,12 +16,12 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="text-nowrap">
-              <th class="col-xs-3">Name</th>
-              <th class="col-xs-2">Username</th>
-              <th class="col-xs-2">Email</th>
-              <th class="col-xs-2">Created <span class="fa fa-chevron-up text-muted"></span></th>
-              <th class="col-xs-3">Permissions</th>
-              <th class="text-center" title="Accounts"><span class="fa fa-key"></span></th>
+              <th class="col-xs-3">{{_('Name')}}</th>
+              <th class="col-xs-2">{{_('Username')}}</th>
+              <th class="col-xs-2">{{_('Email')}}</th>
+              <th class="col-xs-2">{{_('Created')}} <span class="fa fa-chevron-up text-muted"></span></th>
+              <th class="col-xs-3">{{_('Permissions')}}</th>
+              <th class="text-center" title="{{_('Accounts')}}"><span class="fa fa-key"></span></th>
             </tr>
           </thead>
           <tbody>
@@ -29,7 +29,7 @@
               <tr id="{{user_db.key.urlsafe()}}" class="user-row {{'success' if merged_user_db.key.urlsafe() == user_db.key.urlsafe() else 'danger'}}">
                 <td>
                   <input type="radio" name="user_db" value="{{user_db.key.urlsafe()}}" {{'checked' if merged_user_db.key.urlsafe() == user_db.key.urlsafe()}} disabled>
-                  <img src="{{user_db.avatar_url_size(36)}}" width="18" alt="Avatar of {{user_db.name}}">
+                  <img src="{{user_db.avatar_url_size(36)}}" width="18" alt="{{_('Avatar of')}} {{user_db.name}}">
                   {{user_db.name}}
                   # if current_user.id == user_db.key.id()
                     <span class="fa fa-hand-o-left" title="You"></span>
@@ -44,10 +44,10 @@
                 </td>
                 <td>
                   # if user_db.admin
-                    <span class="label label-danger"><span class="fa fa-cog"></span> admin</span>
+                    <span class="label label-danger"><span class="fa fa-cog"></span> {{_('admin')}}</span>
                   # endif
                   # if not user_db.active
-                    <span class="label label-default"><span class="fa fa-ban"></span> inactive</span>
+                    <span class="label label-default"><span class="fa fa-ban"></span> {{_('inactive')}}</span>
                   # endif
                   # for permission in user_db.permissions
                     <span class="label label-info">{{permission}}</span>
@@ -76,12 +76,12 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label">Merged Accounts</label>
+          <label class="control-label">{{_('Merged Accounts')}}</label>
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
                 <th><span class="fa fa-fw fa-key"></span></th>
-                <th class="col-xs-12">Auth ID</th>
+                <th class="col-xs-12">{{_('Auth ID')}}</th>
               </tr>
             </thead>
             <tbody>
@@ -98,16 +98,16 @@
     </div>
     <div class="alert alert-warning">
       <ul>
-        <li>Select the user's entity that you want to keep (the other entities will be deactivated)</li>
-        <li>Before merging make sure the entities with references to the user are being taking care of</li>
-        <li>For deactivated users the 3rd party associated accounts will be cleared</li>
+        <li>{{_("Select the user's entity that you want to keep (the other entities will be deactivated)")}}</li>
+        <li>{{_("Before merging make sure the entities with references to the user are being taking care of")}}</li>
+        <li>{{_("For deactivated users the 3rd party associated accounts will be cleared")}}</li>
       </ul>
     </div>
     <hr>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <button type="submit" class="btn btn-danger btn-lg btn-block btn-loading" {{forms.data_loading_text()}}>
-          Merge
+          {{_('Merge')}}
         </button>
       </div>
     </div>

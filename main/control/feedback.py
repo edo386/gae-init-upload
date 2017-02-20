@@ -1,24 +1,27 @@
 # coding: utf-8
 
+from flask_babel import gettext as __
+from flask_babel import lazy_gettext as _
 import flask
 import flask_wtf
 import wtforms
 
 import auth
 import config
+import i18n
 import task
 import util
 
 from main import app
 
 
-class FeedbackForm(flask_wtf.FlaskForm):
+class FeedbackForm(i18n.Form):
   message = wtforms.TextAreaField(
-    'Message',
+    _('Message'),
     [wtforms.validators.required()], filters=[util.strip_filter],
   )
   email = wtforms.StringField(
-    'Your email',
+    _('Your email'),
     [wtforms.validators.optional(), wtforms.validators.email()],
     filters=[util.email_filter],
   )
@@ -37,12 +40,12 @@ def feedback():
     body = '%s\n\n%s' % (form.message.data, form.email.data)
     kwargs = {'reply_to': form.email.data} if form.email.data else {}
     task.send_mail_notification('%s...' % body[:48].strip(), body, **kwargs)
-    flask.flash('Thank you for your feedback!', category='success')
+    flask.flash(__('Thank you for your feedback!'), category='success')
     return flask.redirect(flask.url_for('welcome'))
 
   return flask.render_template(
     'feedback.html',
-    title='Feedback',
+    title=_('Feedback'),
     html_class='feedback',
     form=form,
   )

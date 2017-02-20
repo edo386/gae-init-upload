@@ -2,6 +2,7 @@
 
 import logging
 
+from flask_babel import lazy_gettext as _
 import flask
 
 from api import helpers
@@ -32,7 +33,7 @@ def error_handler(e):
 
   return flask.render_template(
     'error.html',
-    title='Error %d (%s)!!1' % (e.code, e.name),
+    title=_('Error %(code)d (%(name)s)!!1', code=e.code, name=e.name),
     html_class='error-page',
     error=e,
   ), e.code

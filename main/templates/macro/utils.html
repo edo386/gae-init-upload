@@ -37,10 +37,10 @@
   # if next_url or prev_url
     <ul class="pager">
       # if prev_url
-        <li><a href="{{prev_url}}" rel="nofollow"><span class="fa fa-long-arrow-left"></span> {{prev_caption|safe if prev_caption else 'Prev Page'}}</a></li>
+        <li><a href="{{prev_url}}" rel="nofollow"><span class="fa fa-long-arrow-left"></span> {{prev_caption|safe if prev_caption else _('Prev Page')}}</a></li>
       # endif
       # if next_url
-        <li><a href="{{next_url}}" rel="nofollow">{{next_caption|safe if next_caption else 'Next Page'}} <span class="fa fa-long-arrow-right"></span> </a></li>
+        <li><a href="{{next_url}}" rel="nofollow">{{next_caption|safe if next_caption else _('Next Page')}} <span class="fa fa-long-arrow-right"></span> </a></li>
       # endif
     </ul>
   # endif
@@ -56,7 +56,7 @@
 
 
 # macro signin_button(brand, class_btn, class_icon, url, is_icon=False)
-  # set caption = 'Sign in with %s' % brand
+  # set caption = _('Sign in with %(brand)s', brand=brand)
   <a class="btn btn-lg {{'btn-social-icon' if is_icon else 'btn-block btn-social'}} {{class_btn}}" href="{{url}}" title="{{caption if is_icon}}" rel="nofollow">
     <span class="fa {{class_icon}}"></span>
     {{caption if not is_icon}}
@@ -66,37 +66,37 @@
 
 # macro auth_icon(auth_id)
   # if auth_id == 'email_auth'
-    <span class="fa fa-fw fa-lock" title="Password"></span>
+    <span class="fa fa-fw fa-lock" title="{{_('Password')}}"></span>
   # elif auth_id.startswith('azure_ad')
-    <span class="fa fa-fw fa-windows" title="Azure AD"></span>
+    <span class="fa fa-fw fa-windows" title="{{_('Azure AD')}}'"></span>
   # elif auth_id.startswith('bitbucket')
-    <span class="fa fa-fw fa-bitbucket" title="Bitbucket"></span>
+    <span class="fa fa-fw fa-bitbucket" title="{{_('Bitbucket')}}"></span>
   # elif auth_id.startswith('dropbox')
-    <span class="fa fa-fw fa-dropbox" title="Dropbox"></span>
+    <span class="fa fa-fw fa-dropbox" title="{{_('Dropbox')}}"></span>
   # elif auth_id.startswith('facebook')
-    <span class="fa fa-fw fa-facebook" title="Facebook"></span>
+    <span class="fa fa-fw fa-facebook" title="{{_('Facebook')}}"></span>
   # elif auth_id.startswith('github')
-    <span class="fa fa-fw fa-github" title="GitHub"></span>
+    <span class="fa fa-fw fa-github" title="{{_('GitHub')}}"></span>
   # elif auth_id.startswith('google')
-    <span class="fa fa-fw fa-google-plus" title="Google"></span>
+    <span class="fa fa-fw fa-google-plus" title="{{_('Google')}}"></span>
   # elif auth_id.startswith('federated')
-    <span class="fa fa-fw fa-google" title="Google App Engine"></span>
+    <span class="fa fa-fw fa-google" title="{{_('Google App Engine')}}"></span>
   # elif auth_id.startswith('instagram')
-    <span class="fa fa-fw fa-instagram" title="Instagram"></span>
+    <span class="fa fa-fw fa-instagram" title="{{_('Instagram')}}"></span>
   # elif auth_id.startswith('linkedin')
-    <span class="fa fa-fw fa-linkedin" title="LinkedIn"></span>
+    <span class="fa fa-fw fa-linkedin" title="{{_('LinkedIn')}}"></span>
   # elif auth_id.startswith('mailru')
-    <span class="fa fa-fw fa-at" title="Mail.Ru"></span>
+    <span class="fa fa-fw fa-at" title="{{_('Mail.Ru')}}'"></span>
   # elif auth_id.startswith('microsoft')
-    <span class="fa fa-fw fa-windows" title="Microsoft"></span>
+    <span class="fa fa-fw fa-windows" title="{{_('Microsoft')}}"></span>
   # elif auth_id.startswith('reddit')
-    <span class="fa fa-fw fa-reddit" title="Reddit"></span>
+    <span class="fa fa-fw fa-reddit" title="{{_('Reddit')}}"></span>
   # elif auth_id.startswith('twitter')
-    <span class="fa fa-fw fa-twitter" title="Twitter"></span>
+    <span class="fa fa-fw fa-twitter" title="{{_('Twitter')}}"></span>
   # elif auth_id.startswith('yahoo')
-    <span class="fa fa-fw fa-yahoo" title="Yahoo!"></span>
+    <span class="fa fa-fw fa-yahoo" title="{{_('Yahoo!')}}"></span>
   # else
-    <span class="fa fa-fw fa-question" title="Unknown"></span>
+    <span class="fa fa-fw fa-question" title="{{_('Unknown')}}"></span>
   # endif
 # endmacro
 

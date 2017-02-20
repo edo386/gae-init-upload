@@ -2,7 +2,12 @@
 
 import copy
 
+
 from google.appengine.ext import deferred
+
+from flask_babel import gettext as __
+from flask_babel import lazy_gettext as _
+
 from google.appengine.ext import ndb
 from webargs import fields as wf
 from webargs.flaskparser import parser
@@ -14,6 +19,7 @@ import wtforms
 import auth
 import cache
 import config
+import i18n
 import model
 import task
 import util
@@ -39,7 +45,7 @@ def user_list():
   return flask.render_template(
     'user/user_list.html',
     html_class='user-list',
-    title='User List',
+    title=_('User List'),
     user_dbs=user_dbs,
     next_url=util.generate_next_url(cursors['next']),
     prev_url=util.generate_next_url(cursors['prev']),
@@ -51,7 +57,7 @@ def user_list():
 ###############################################################################
 # User Update
 ###############################################################################
-class UserUpdateForm(flask_wtf.FlaskForm):
+class UserUpdateForm(i18n.Form):
   username = wtforms.StringField(
     model.User.username._verbose_name,
     [wtforms.validators.required(), wtforms.validators.length(min=2)],
@@ -65,6 +71,10 @@ class UserUpdateForm(flask_wtf.FlaskForm):
     model.User.email._verbose_name,
     [wtforms.validators.optional(), wtforms.validators.email()],
     filters=[util.email_filter],
+  )
+  locale = wtforms.SelectField(
+    model.User.locale._verbose_name,
+    choices=config.LOCALE_SORTED, filters=[util.strip_filter],
   )
   admin = wtforms.BooleanField(model.User.admin._verbose_name)
   active = wtforms.BooleanField(model.User.active._verbose_name)
@@ -80,7 +90,7 @@ class UserUpdateForm(flask_wtf.FlaskForm):
     super(UserUpdateForm, self).__init__(*args, **kwds)
     self.permissions.choices = [
       (p, p) for p in sorted(UserUpdateForm._permission_choices)
-      ]
+    ]
 
   @auth.permission_registered.connect
   def _permission_registered_callback(sender, permission):
@@ -104,9 +114,9 @@ def user_update(user_id=0):
   form.permissions.choices = sorted(set(form.permissions.choices))
   if form.validate_on_submit():
     if not util.is_valid_username(form.username.data):
-      form.username.errors.append('This username is invalid.')
+      form.username.errors.append(_('This username is invalid.'))
     elif not model.User.is_username_available(form.username.data, user_db.key):
-      form.username.errors.append('This username is already taken.')
+      form.username.errors.append(_('This username is already taken.'))
     else:
       form.populate_obj(user_db)
       if auth.current_user_key() == user_db.key:
@@ -119,7 +129,7 @@ def user_update(user_id=0):
 
   return flask.render_template(
     'user/user_update.html',
-    title=user_db.name or 'New User',
+    title=user_db.name or _('New User'),
     html_class='user-update',
     form=form,
     user_db=user_db,
@@ -135,19 +145,19 @@ def user_update(user_id=0):
 def user_verify(token):
   user_db = auth.current_user_db()
   if user_db.token != token:
-    flask.flash('That link is either invalid or expired.', category='danger')
+    flask.flash(__('That link is either invalid or expired.'), category='danger')
     return flask.redirect(flask.url_for('profile'))
   user_db.verified = True
   user_db.token = util.uuid()
   user_db.put()
-  flask.flash('Hooray! Your email is now verified.', category='success')
+  flask.flash(__('Hooray! Your email is now verified.'), category='success')
   return flask.redirect(flask.url_for('profile'))
 
 
 ###############################################################################
 # User Forgot
 ###############################################################################
-class UserForgotForm(flask_wtf.FlaskForm):
+class UserForgotForm(i18n.Form):
   email = wtforms.StringField(
     'Email',
     [wtforms.validators.required(), wtforms.validators.email()],
@@ -187,7 +197,7 @@ def user_forgot(token=None):
 
   return flask.render_template(
     'user/user_forgot.html',
-    title='Forgot Password?',
+    title=_('Forgot Password?'),
     html_class='user-forgot',
     form=form,
   )
@@ -196,9 +206,9 @@ def user_forgot(token=None):
 ###############################################################################
 # User Reset
 ###############################################################################
-class UserResetForm(flask_wtf.FlaskForm):
+class UserResetForm(i18n.Form):
   new_password = wtforms.StringField(
-    'New Password',
+    _('New Password'),
     [wtforms.validators.required(), wtforms.validators.length(min=6)],
   )
 
@@ -208,7 +218,7 @@ class UserResetForm(flask_wtf.FlaskForm):
 def user_reset(token=None):
   user_db = model.User.get_by('token', token)
   if not user_db:
-    flask.flash('That link is either invalid or expired.', category='danger')
+    flask.flash(__('That link is either invalid or expired.'), category='danger')
     return flask.redirect(flask.url_for('welcome'))
 
   if auth.is_logged_in():
@@ -221,7 +231,7 @@ def user_reset(token=None):
     user_db.token = util.uuid()
     user_db.verified = True
     user_db.put()
-    flask.flash('Your password was changed succesfully.', category='success')
+    flask.flash(__('Your password was changed succesfully.'), category='success')
     return auth.signin_user_db(user_db)
 
   return flask.render_template(
@@ -236,13 +246,13 @@ def user_reset(token=None):
 ###############################################################################
 # User Activate
 ###############################################################################
-class UserActivateForm(flask_wtf.FlaskForm):
+class UserActivateForm(i18n.Form):
   name = wtforms.StringField(
     model.User.name._verbose_name,
     [wtforms.validators.required()], filters=[util.strip_filter],
   )
   password = wtforms.StringField(
-    'Password',
+    _('Password'),
     [wtforms.validators.required(), wtforms.validators.length(min=6)],
   )
 
@@ -255,7 +265,7 @@ def user_activate(token):
 
   user_db = model.User.get_by('token', token)
   if not user_db:
-    flask.flash('That link is either invalid or expired.', category='danger')
+    flask.flash(__('That link is either invalid or expired.'), category='danger')
     return flask.redirect(flask.url_for('welcome'))
 
   form = UserActivateForm(obj=user_db)
@@ -279,16 +289,16 @@ def user_activate(token):
 ###############################################################################
 # User Merge
 ###############################################################################
-class UserMergeForm(flask_wtf.FlaskForm):
-  user_key = wtforms.StringField('User Key', [wtforms.validators.required()])
-  user_keys = wtforms.StringField('User Keys', [wtforms.validators.required()])
-  username = wtforms.StringField('Username', [wtforms.validators.optional()])
+class UserMergeForm(i18n.Form):
+  user_key = wtforms.HiddenField('User Key', [wtforms.validators.required()])
+  user_keys = wtforms.HiddenField('User Keys', [wtforms.validators.required()])
+  username = wtforms.StringField(_('Username'), [wtforms.validators.optional()])
   name = wtforms.StringField(
-    'Name (merged)',
+    _('Name (merged)'),
     [wtforms.validators.required()], filters=[util.strip_filter],
   )
   email = wtforms.StringField(
-    'Email (merged)',
+    _('Email (merged)'),
     [wtforms.validators.optional(), wtforms.validators.email()],
     filters=[util.email_filter],
   )
@@ -346,7 +356,7 @@ def user_merge():
 
   return flask.render_template(
     'user/user_merge.html',
-    title='Merge Users',
+    title=_('Merge Users'),
     html_class='user-merge',
     user_dbs=user_dbs,
     merged_user_db=merged_user_db,

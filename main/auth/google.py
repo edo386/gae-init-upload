@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from flask_babel import gettext as __
 import flask
 
 import auth
@@ -26,7 +27,7 @@ google = auth.create_oauth_app(google_config, 'google')
 def google_authorized():
   response = google.authorized_response()
   if response is None:
-    flask.flash('You denied the request to sign in.')
+    flask.flash(__('You denied the request to sign in.'))
     return flask.redirect(util.get_next_url())
 
   flask.session['oauth_token'] = (response['access_token'], '')

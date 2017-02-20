@@ -1,11 +1,13 @@
 # coding: utf-8
 
+from flask_babel import gettext as __
+from flask_babel import lazy_gettext as _
 import flask
-import flask_wtf
 import wtforms
 
 import auth
 import config
+import i18n
 import model
 import util
 import task
@@ -32,7 +34,7 @@ def profile():
 ###############################################################################
 # Profile Update
 ###############################################################################
-class ProfileUpdateForm(flask_wtf.FlaskForm):
+class ProfileUpdateForm(i18n.Form):
   name = wtforms.StringField(
     model.User.name._verbose_name,
     [wtforms.validators.required()], filters=[util.strip_filter],
@@ -41,6 +43,10 @@ class ProfileUpdateForm(flask_wtf.FlaskForm):
     model.User.email._verbose_name,
     [wtforms.validators.optional(), wtforms.validators.email()],
     filters=[util.email_filter],
+  )
+  locale = wtforms.SelectField(
+    model.User.locale._verbose_name,
+    choices=config.LOCALE_SORTED, filters=[util.strip_filter],
   )
 
 
@@ -53,7 +59,7 @@ def profile_update():
   if form.validate_on_submit():
     email = form.email.data
     if email and not user_db.is_email_available(email, user_db.key):
-      form.email.errors.append('This email is already taken.')
+      form.email.errors.append(_('This email is already taken.'))
 
     if not form.errors:
       send_verification = not user_db.token or user_db.email != email
@@ -62,7 +68,9 @@ def profile_update():
         user_db.verified = False
         task.verify_email_notification(user_db)
       user_db.put()
-      return flask.redirect(flask.url_for('profile'))
+      return flask.redirect(flask.url_for(
+        'set_locale', locale=user_db.locale, next=flask.url_for('profile')
+      ))
 
   return flask.render_template(
     'profile/profile_update.html',
@@ -76,12 +84,12 @@ def profile_update():
 ###############################################################################
 # Profile Password
 ###############################################################################
-class ProfilePasswordForm(flask_wtf.FlaskForm):
+class ProfilePasswordForm(i18n.Form):
   old_password = wtforms.StringField(
-    'Old Password', [wtforms.validators.required()],
+    _('Old Password'), [wtforms.validators.optional()],
   )
   new_password = wtforms.StringField(
-    'New Password',
+    _('New Password'),
     [wtforms.validators.required(), wtforms.validators.length(min=6)]
   )
 
@@ -104,12 +112,12 @@ def profile_password():
     if new_password or old_password:
       if user_db.password_hash:
         if util.password_hash(user_db, old_password) != user_db.password_hash:
-          form.old_password.errors.append('Invalid current password')
+          form.old_password.errors.append(_('Invalid current password'))
           errors = True
 
       if not (form.errors or errors):
         user_db.password_hash = util.password_hash(user_db, new_password)
-        flask.flash('Your password has been changed.', category='success')
+        flask.flash(__('Your password has been changed.'), category='success')
 
     if not (form.errors or errors):
       user_db.put()

@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from flask_babel import gettext as __
 import flask
 
 import auth
@@ -25,7 +26,7 @@ twitter = auth.create_oauth_app(twitter_config, 'twitter')
 def twitter_authorized():
   response = twitter.authorized_response()
   if response is None:
-    flask.flash('You denied the request to sign in.')
+    flask.flash(__('You denied the request to sign in.'))
     return flask.redirect(util.get_next_url())
 
   flask.session['oauth_token'] = (

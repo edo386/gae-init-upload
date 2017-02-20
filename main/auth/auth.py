@@ -5,6 +5,8 @@ from __future__ import absolute_import
 import functools
 import re
 
+from flask_babel import gettext as __
+from flask_babel import lazy_gettext as _
 from flask_oauthlib import client as oauth
 from google.appengine.ext import ndb
 import flask
@@ -15,13 +17,50 @@ import wtforms
 
 import cache
 import config
+import i18n
 import model
 import task
 import util
 
 from main import app
+from main import babel
 
 _signals = flask.signals.Namespace()
+
+
+###############################################################################
+# Babel stuff - i18n
+###############################################################################
+@babel.localeselector
+def get_locale():
+  if hasattr(flask.request, 'locale'):
+    return flask.request.locale
+  locale = flask.session.pop('locale', None)
+  if not locale:
+    locale = flask.request.cookies.get('locale', None)
+    if not locale:
+      locale = flask.request.accept_languages.best_match(
+        matches=config.LOCALE.keys(),
+        default=config.LOCALE_DEFAULT,
+      )
+  return util.check_locale(locale)
+
+
+@flask.request_started.connect_via(app)
+def request_started(sender, **extra):
+  hl = util.param('hl')
+  flask.request.locale = util.check_locale(hl) if hl else get_locale()
+  flask.request.locale_html = flask.request.locale.replace('_', '-')
+
+
+@flask.request_finished.connect_via(app)
+def request_finished(sender, response, **extra):
+  util.set_locale(util.param('hl'), response)
+
+
+@app.route('/l/<path:locale>/')
+def set_locale(locale):
+  return util.set_locale(locale, flask.redirect(util.get_next_url()))
 
 
 ###############################################################################
@@ -181,18 +220,18 @@ def permission_required(permission=None, methods=None):
 ###############################################################################
 # Sign in stuff
 ###############################################################################
-class SignInForm(flask_wtf.FlaskForm):
+class SignInForm(i18n.Form):
   email = wtforms.StringField(
-    'Email',
+    _('Email'),
     [wtforms.validators.required()],
     filters=[util.email_filter],
   )
   password = wtforms.StringField(
-    'Password',
+    _('Password'),
     [wtforms.validators.required()],
   )
   remember = wtforms.BooleanField(
-    'Keep me signed in',
+    _('Keep me signed in'),
     [wtforms.validators.optional()],
   )
   recaptcha = flask_wtf.RecaptchaField()
@@ -212,7 +251,7 @@ def signin():
         cache.reset_auth_attempt()
         return signin_user_db(result)
       if result is None:
-        form.email.errors.append('Email or Password do not match')
+        form.email.errors.append(__('Email or Password do not match'))
       if result is False:
         return flask.redirect(flask.url_for('welcome'))
     if not form.errors:
@@ -223,7 +262,7 @@ def signin():
 
   return flask.render_template(
     'auth/auth.html',
-    title='Sign in',
+    title=_('Sign in'),
     html_class='auth',
     next_url=next_url,
     form=form,
@@ -235,9 +274,9 @@ def signin():
 ###############################################################################
 # Sign up stuff
 ###############################################################################
-class SignUpForm(flask_wtf.FlaskForm):
+class SignUpForm(i18n.Form):
   email = wtforms.StringField(
-    'Email',
+    _('Email'),
     [wtforms.validators.required(), wtforms.validators.email()],
     filters=[util.email_filter],
   )
@@ -254,7 +293,7 @@ def signup():
     if form.validate_on_submit():
       user_db = model.User.get_by('email', form.email.data)
       if user_db:
-        form.email.errors.append('This email is already taken.')
+        form.email.errors.append(__('This email is already taken.'))
 
       if not form.errors:
         user_db = create_user_db(
@@ -271,7 +310,7 @@ def signup():
   if form and form.errors:
     cache.bump_auth_attempt()
 
-  title = 'Sign up' if config.CONFIG_DB.has_email_authentication else 'Sign in'
+  title = _('Sign up') if config.CONFIG_DB.has_email_authentication else _('Sign in')
   return flask.render_template(
     'auth/auth.html',
     title=title,
@@ -416,8 +455,11 @@ def signin_user_db(user_db):
     user_db.put_async()
     next_url = util.get_next_url(auth_params['next'])
     next_url = '%s%s%s' % (next_url, '&' if '?' in next_url else '?', user_db.key.urlsafe()[-4:])
-    return flask.redirect(next_url)
-  flask.flash('Sorry, but you could not sign in.', category='danger')
+    return util.set_locale(
+      user_db.locale,
+      flask.redirect(next_url),
+    )
+  flask.flash(__('Sorry, but you could not sign in.'), category='danger')
   return flask.redirect(flask.url_for('signin'))
 
 

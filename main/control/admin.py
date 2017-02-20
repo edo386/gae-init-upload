@@ -1,11 +1,12 @@
 # coding: utf-8
 
+from flask_babel import lazy_gettext as _
 import flask
-import flask_wtf
 import wtforms
 
 import auth
 import config
+import i18n
 import model
 import util
 
@@ -29,7 +30,7 @@ def admin():
 
   return flask.render_template(
     'admin/admin.html',
-    title='Admin',
+    title=_('Admin'),
     html_class='admin',
     localhost=localhost,
   )
@@ -38,7 +39,7 @@ def admin():
 ###############################################################################
 # Config Stuff
 ###############################################################################
-class ConfigUpdateForm(flask_wtf.FlaskForm):
+class ConfigUpdateForm(i18n.Form):
   analytics_id = wtforms.StringField(model.Config.analytics_id._verbose_name, filters=[util.strip_filter])
   announcement_html = wtforms.TextAreaField(model.Config.announcement_html._verbose_name, filters=[util.strip_filter])
   announcement_type = wtforms.SelectField(model.Config.announcement_type._verbose_name, choices=[(t, t.title()) for t in model.Config.announcement_type._choices])
@@ -51,6 +52,7 @@ class ConfigUpdateForm(flask_wtf.FlaskForm):
   flask_secret_key = wtforms.StringField(model.Config.flask_secret_key._verbose_name, [wtforms.validators.optional()], filters=[util.strip_filter])
   letsencrypt_challenge = wtforms.StringField(model.Config.letsencrypt_challenge._verbose_name, filters=[util.strip_filter])
   letsencrypt_response = wtforms.StringField(model.Config.letsencrypt_response._verbose_name, filters=[util.strip_filter])
+  locale = wtforms.SelectField(model.Config.locale._verbose_name, choices=config.LOCALE_SORTED)
   notify_on_new_user = wtforms.BooleanField(model.Config.notify_on_new_user._verbose_name)
   recaptcha_private_key = wtforms.StringField(model.Config.recaptcha_private_key._verbose_name, filters=[util.strip_filter])
   recaptcha_public_key = wtforms.StringField(model.Config.recaptcha_public_key._verbose_name, filters=[util.strip_filter])
@@ -76,7 +78,7 @@ def admin_config():
 
   return flask.render_template(
     'admin/admin_config.html',
-    title='App Config',
+    title=_('App Config'),
     html_class='admin-config',
     form=form,
     api_url=flask.url_for('api.admin.config'),
@@ -86,7 +88,7 @@ def admin_config():
 ###############################################################################
 # Auth Stuff
 ###############################################################################
-class AuthUpdateForm(flask_wtf.FlaskForm):
+class AuthUpdateForm(i18n.Form):
   azure_ad_client_id = wtforms.StringField(model.Config.azure_ad_client_id._verbose_name, filters=[util.strip_filter])
   azure_ad_client_secret = wtforms.StringField(model.Config.azure_ad_client_secret._verbose_name, filters=[util.strip_filter])
   bitbucket_key = wtforms.StringField(model.Config.bitbucket_key._verbose_name, filters=[util.strip_filter])
@@ -131,7 +133,7 @@ def admin_auth():
 
   return flask.render_template(
     'admin/admin_auth.html',
-    title='Auth Config',
+    title=_('Auth Config'),
     html_class='admin-auth',
     form=form,
     api_url=flask.url_for('api.admin.config'),

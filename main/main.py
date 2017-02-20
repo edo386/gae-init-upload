@@ -1,6 +1,7 @@
 # coding: utf-8
 
 import flask
+import flask_babel
 
 import config
 import util
@@ -15,6 +16,8 @@ app.jinja_env.globals.update(
   slugify=util.slugify,
   update_query_argument=util.update_query_argument,
 )
+app.config['BABEL_DEFAULT_LOCALE'] = config.LOCALE_DEFAULT
+babel = flask_babel.Babel(app)
 
 import auth
 import control

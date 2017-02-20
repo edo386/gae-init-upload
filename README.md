@@ -6,11 +6,20 @@ gae-init-upload
 > **gae-init-upload** is the easiest boilerplate to kick start new applications
 on Google App Engine using Python, Flask, RESTful, Bootstrap, Google Cloud
 Storage and tons of other cool features.
+=======
+gae-init-babel
+==============
+[![Slack Status](https://gae-init-slack.herokuapp.com/badge.svg)](https://gae-init-slack.herokuapp.com)
+
+> **gae-init-babel** is the easiest boilerplate to kick start new applications on Google
+App Engine using Python, Flask, RESTful, Bootstrap, Babel and tons of other cool features.
+
 
 Read the [documentation][], where you can find a complete [feature list][],
 a detailed [tutorial][], the [how to][] section and more..
 
 The latest version is always accessible from
+
 [http://upload.gae-init.appspot.com](http://upload.gae-init.appspot.com)
 
 Requirements
@@ -87,7 +96,17 @@ Tech Stack
   - [OpenID][] sign in (Google, Facebook, Twitter and more)
   - [Python 2.7][], [pip][], [virtualenv][]
   - [Gulp][], [Bower][]
+  - [Babel][]
 
+
+Support
+-------
+
+Due to lack of documentation if you run into any troubles, feel free to add an
+issue and we'll be happy to improve or provide more info.
+
+
+[babel]: http://babel.edgewall.org/wiki/Download
 [bootstrap]: http://getbootstrap.com/
 [bower]: http://bower.io/
 [coffeescript]: http://coffeescript.org/
@@ -97,6 +116,7 @@ Tech Stack
 [flask-wtf]: https://flask-wtf.readthedocs.org
 [flask]: http://flask.pocoo.org/
 [font awesome]: http://fortawesome.github.com/Font-Awesome/
+[gae-init]: http://gae-init.appspot.com
 [google app engine sdk for python]: https://developers.google.com/appengine/downloads
 [google app engine]: https://developers.google.com/appengine/
 [gulp]: http://gulpjs.com
@@ -108,11 +128,9 @@ Tech Stack
 [macos]: http://www.apple.com/macos/
 [moment.js]: http://momentjs.com/
 [ndb]: https://developers.google.com/appengine/docs/python/ndb/
-[node.js]: http://nodejs.org/
 [openid]: http://en.wikipedia.org/wiki/OpenID
 [pip]: http://www.pip-installer.org/
 [python 2.7]: https://developers.google.com/appengine/docs/python/python27/using27
 [social buttons]: http://lipis.github.io/bootstrap-social/
 [tutorial]: http://docs.gae-init.appspot.com/tutorial/
 [virtualenv]: http://www.virtualenv.org/
-[windows]: http://windows.microsoft.com/

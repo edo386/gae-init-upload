@@ -3,7 +3,7 @@
 
 # block content
   <div class="page-header">
-    <h1>{{title}} <small>Any questions or suggestions are welcome</small></h1>
+    <h1>{{title}} <small>{{_('Any questions or suggestions are welcome')}}</small></h1>
   </div>
 
   <div class="row">
@@ -16,7 +16,7 @@
         {{forms.recaptcha_field(form.recaptcha)}}
 
         <button type="submit" class="btn btn-primary btn-block btn-loading" {{forms.data_loading_text()}}>
-          Send Feedback
+          {{_('Send Feedback')}}
         </button>
       </form>
     </div>

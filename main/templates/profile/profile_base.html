@@ -10,22 +10,22 @@
           <div class="btn-group">
             <a class="btn btn-default btn-xs" href="{{url_for('profile_update')}}">
               <span class="fa fa-edit"></span>
-              Edit
+              {{_('Edit')}}
             </a>
             # if config.CONFIG_DB.has_email_authentication
               <a class="btn btn-default btn-xs" href="{{url_for('profile_password')}}">
                 <span class="fa fa-lock fa-fw"></span>
                 # if not user_db.password_hash
-                  Set Password
+                  {{_('Set Password')}}
                 # else
-                  Change Password
+                  {{_('Change Password')}}
                 # endif
               </a>
             # endif
           </div>
         </div>
       # else
-        {{utils.back_link('Back to profile', 'profile')}}
+        {{utils.back_link(_('Back to profile'), 'profile')}}
       # endif
 
       {{title}}
@@ -34,10 +34,10 @@
 
   <div class="row">
     <div class="col-xs-5 col-sm-4 col-md-3">
-      <img class="img-thumbnail" src="{{user_db.avatar_url_size(512)}}" alt="Avatar of {{user_db.name}}">
+      <img class="img-thumbnail" src="{{user_db.avatar_url_size(512)}}" alt="{{_('Avatar of %(name)s', name=user_db.name)}}">
       # if html_class == 'profile-update'
         <p class="help-block">
-          Change on <a href="//gravatar.com" target="_blank">Gravatar</a>
+          {{_('Change on')}} <a href="//gravatar.com" target="_blank">{{_('Gravatar')}}</a>
         </p>
       # endif
     </div>
