@@ -52,10 +52,8 @@ TAG_SEPARATOR = ' '
 # To Add/Modify languages use one of the filenames in: libx/babel/localedata/
 # Examples with country included: en_GB, ru_RU, de_CH
 LOCALE = {
+  'es_CO': u'Español',
   'en': u'English',
-  'el': u'Ελληνικά',
-  'pl': u'Polski',
-  'ru': u'Русский',
 }
 
 LOCALE_SORTED = sorted(LOCALE.iteritems(), key=operator.itemgetter(1))

@@ -1,0 +1,703 @@
+# Spanish (Colombia) translations for PROJECT.
+# Copyright (C) 2017 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2017-02-19 22:30-0500\n"
+"PO-Revision-Date: 2017-02-19 22:15-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es_CO\n"
+"Language-Team: es_CO <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+
+#: ../main/auth/auth.py:225 ../main/auth/auth.py:279 ../main/model/user.py:21
+#: ../main/templates/profile/profile.html:7
+#: ../main/templates/user/user_list.html:92
+#: ../main/templates/user/user_merge.html:21
+msgid "Email"
+msgstr "E-mail"
+
+#: ../main/auth/auth.py:230 ../main/control/user.py:255
+#: ../main/templates/macro/utils.html:69
+msgid "Password"
+msgstr "Contraseña"
+
+#: ../main/auth/auth.py:234 ../main/templates/auth/auth.html:45
+msgid "Keep me signed in"
+msgstr "Mantener sesión iniciada"
+
+#: ../main/auth/auth.py:265 ../main/auth/auth.py:313
+#: ../main/templates/auth/signin_form.html:12
+#: ../main/templates/bit/user_menu.html:20
+msgid "Sign in"
+msgstr "Iniciar Sesión"
+
+#: ../main/auth/auth.py:313 ../main/templates/auth/signup_form.html:9
+msgid "Sign up"
+msgstr "Registrate"
+
+#: ../main/control/admin.py:33 ../main/model/user.py:25
+#: ../main/templates/bit/user_menu.html:12
+msgid "Admin"
+msgstr "Administrador"
+
+#: ../main/control/admin.py:81 ../main/templates/admin/admin.html:9
+msgid "App Config"
+msgstr "Configurar App"
+
+#: ../main/control/admin.py:136 ../main/templates/admin/admin.html:10
+msgid "Auth Config"
+msgstr "Configurar Autenticación"
+
+#: ../main/control/error.py:36
+#, python-format
+msgid "Error %(code)d (%(name)s)!!1"
+msgstr ""
+
+#: ../main/control/feedback.py:20
+msgid "Message"
+msgstr "Mensaje"
+
+#: ../main/control/feedback.py:24
+msgid "Your email"
+msgstr "Tu Correo"
+
+#: ../main/control/feedback.py:48 ../main/templates/bit/contact_menu.html:3
+msgid "Feedback"
+msgstr "Comentarios"
+
+#: ../main/control/profile.py:62
+msgid "This email is already taken."
+msgstr "E-mail ya está registrado"
+
+#: ../main/control/profile.py:89
+msgid "Old Password"
+msgstr "Contraseña anterior"
+
+#: ../main/control/profile.py:92 ../main/control/user.py:211
+msgid "New Password"
+msgstr "Nueva Contraseña"
+
+#: ../main/control/profile.py:115
+msgid "Invalid current password"
+msgstr "Contraseña actual no valida"
+
+#: ../main/control/user.py:48
+msgid "User List"
+msgstr "Lista de usuarios"
+
+#: ../main/control/user.py:117
+msgid "This username is invalid."
+msgstr "Usuario Invalido"
+
+#: ../main/control/user.py:119
+msgid "This username is already taken."
+msgstr "Usario ya registrado"
+
+#: ../main/control/user.py:132 ../main/templates/user/user_list.html:12
+msgid "New User"
+msgstr "Nuevo Usuario"
+
+#: ../main/control/user.py:200
+msgid "Forgot Password?"
+msgstr "Olvidé mi contraseña"
+
+#: ../main/control/user.py:295 ../main/model/user.py:20
+#: ../main/templates/profile/profile.html:6
+#: ../main/templates/user/user_list.html:92
+#: ../main/templates/user/user_merge.html:20
+msgid "Username"
+msgstr "Usuario"
+
+#: ../main/control/user.py:297
+msgid "Name (merged)"
+msgstr ""
+
+#: ../main/control/user.py:301
+msgid "Email (merged)"
+msgstr ""
+
+#: ../main/control/user.py:359
+msgid "Merge Users"
+msgstr ""
+
+#: ../main/lib/flask_wtf/file.py:46 ../main/lib/wtforms/validators.py:203
+#: ../main/lib/wtforms/validators.py:243
+#: ../temp/venv/Lib/site-packages/flask_wtf/file.py:46
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:203
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:243
+msgid "This field is required."
+msgstr ""
+
+#: ../main/lib/flask_wtf/file.py:80
+#: ../temp/venv/Lib/site-packages/flask_wtf/file.py:80
+msgid "File does not have an approved extension: {extensions}"
+msgstr ""
+
+#: ../main/lib/flask_wtf/file.py:85
+#: ../temp/venv/Lib/site-packages/flask_wtf/file.py:85
+msgid "File does not have an approved extension."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:56
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:56
+#, python-format
+msgid "Invalid field name '%s'."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:64
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:64
+#, python-format
+msgid "Field must be equal to %(other_name)s."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:97
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:97
+#, python-format
+msgid "Field must be at least %(min)d character long."
+msgid_plural "Field must be at least %(min)d characters long."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../main/lib/wtforms/validators.py:100
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:100
+#, python-format
+msgid "Field cannot be longer than %(max)d character."
+msgid_plural "Field cannot be longer than %(max)d characters."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../main/lib/wtforms/validators.py:103
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:103
+#, python-format
+msgid "Field must be between %(min)d and %(max)d characters long."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:139
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:139
+#, python-format
+msgid "Number must be at least %(min)s."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:141
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:141
+#, python-format
+msgid "Number must be at most %(max)s."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:143
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:143
+#, python-format
+msgid "Number must be between %(min)s and %(max)s."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:275
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:275
+msgid "Invalid input."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:301
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:301
+msgid "Invalid email address."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:335
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:335
+msgid "Invalid IP address."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:386
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:386
+msgid "Invalid Mac address."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:415
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:415
+msgid "Invalid URL."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:436
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:436
+msgid "Invalid UUID."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:464
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:464
+#, python-format
+msgid "Invalid value, must be one of: %(values)s."
+msgstr ""
+
+#: ../main/lib/wtforms/validators.py:496
+#: ../temp/venv/Lib/site-packages/wtforms/validators.py:496
+#, python-format
+msgid "Invalid value, can't be any of: %(values)s."
+msgstr ""
+
+#: ../main/lib/wtforms/csrf/core.py:98 ../main/lib/wtforms/ext/csrf/form.py:47
+#: ../temp/venv/Lib/site-packages/wtforms/csrf/core.py:98
+#: ../temp/venv/Lib/site-packages/wtforms/ext/csrf/form.py:47
+msgid "Invalid CSRF Token"
+msgstr ""
+
+#: ../main/lib/wtforms/csrf/session.py:61
+#: ../main/lib/wtforms/ext/csrf/session.py:58
+#: ../temp/venv/Lib/site-packages/wtforms/csrf/session.py:61
+#: ../temp/venv/Lib/site-packages/wtforms/ext/csrf/session.py:58
+msgid "CSRF token missing"
+msgstr ""
+
+#: ../main/lib/wtforms/csrf/session.py:69
+#: ../main/lib/wtforms/ext/csrf/session.py:66
+#: ../temp/venv/Lib/site-packages/wtforms/csrf/session.py:69
+#: ../temp/venv/Lib/site-packages/wtforms/ext/csrf/session.py:66
+msgid "CSRF failed"
+msgstr ""
+
+#: ../main/lib/wtforms/csrf/session.py:74
+#: ../main/lib/wtforms/ext/csrf/session.py:71
+#: ../temp/venv/Lib/site-packages/wtforms/csrf/session.py:74
+#: ../temp/venv/Lib/site-packages/wtforms/ext/csrf/session.py:71
+msgid "CSRF token expired"
+msgstr ""
+
+#: ../main/lib/wtforms/ext/appengine/fields.py:87
+#: ../main/lib/wtforms/ext/appengine/fields.py:164
+#: ../main/lib/wtforms/ext/appengine/fields.py:166
+#: ../main/lib/wtforms/ext/django/fields.py:95
+#: ../main/lib/wtforms/ext/sqlalchemy/fields.py:125
+#: ../main/lib/wtforms/ext/sqlalchemy/fields.py:127
+#: ../main/lib/wtforms/ext/sqlalchemy/fields.py:180
+#: ../main/lib/wtforms/ext/sqlalchemy/fields.py:185
+#: ../main/lib/wtforms/fields/core.py:472
+#: ../temp/venv/Lib/site-packages/wtforms/ext/appengine/fields.py:87
+#: ../temp/venv/Lib/site-packages/wtforms/ext/appengine/fields.py:164
+#: ../temp/venv/Lib/site-packages/wtforms/ext/appengine/fields.py:166
+#: ../temp/venv/Lib/site-packages/wtforms/ext/django/fields.py:95
+#: ../temp/venv/Lib/site-packages/wtforms/ext/sqlalchemy/fields.py:125
+#: ../temp/venv/Lib/site-packages/wtforms/ext/sqlalchemy/fields.py:127
+#: ../temp/venv/Lib/site-packages/wtforms/ext/sqlalchemy/fields.py:180
+#: ../temp/venv/Lib/site-packages/wtforms/ext/sqlalchemy/fields.py:185
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:472
+msgid "Not a valid choice"
+msgstr ""
+
+#: ../main/lib/wtforms/ext/appengine/fields.py:185
+#: ../temp/venv/Lib/site-packages/wtforms/ext/appengine/fields.py:185
+msgid "Not a valid list"
+msgstr ""
+
+#: ../main/lib/wtforms/ext/appengine/fields.py:204
+#: ../temp/venv/Lib/site-packages/wtforms/ext/appengine/fields.py:204
+msgid "Not a valid integer list"
+msgstr ""
+
+#: ../main/lib/wtforms/ext/dateutil/fields.py:63
+#: ../temp/venv/Lib/site-packages/wtforms/ext/dateutil/fields.py:63
+msgid "Please input a date/time value"
+msgstr ""
+
+#: ../main/lib/wtforms/ext/dateutil/fields.py:75
+#: ../main/lib/wtforms/ext/dateutil/fields.py:83
+#: ../temp/venv/Lib/site-packages/wtforms/ext/dateutil/fields.py:75
+#: ../temp/venv/Lib/site-packages/wtforms/ext/dateutil/fields.py:83
+msgid "Invalid date/time input"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:465
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:465
+msgid "Invalid Choice: could not coerce"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:498
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:498
+msgid "Invalid choice(s): one or more data inputs could not be coerced"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:505
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:505
+#, python-format
+msgid "'%(value)s' is not a valid choice for this field"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:588
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:588
+msgid "Not a valid integer value"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:654
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:654
+msgid "Not a valid decimal value"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:681
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:681
+msgid "Not a valid float value"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:742
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:742
+msgid "Not a valid datetime value"
+msgstr ""
+
+#: ../main/lib/wtforms/fields/core.py:759
+#: ../temp/venv/Lib/site-packages/wtforms/fields/core.py:759
+msgid "Not a valid date value"
+msgstr ""
+
+#: ../main/model/user.py:19 ../main/templates/user/user_list.html:91
+#: ../main/templates/user/user_merge.html:19
+msgid "Name"
+msgstr "Nombre"
+
+#: ../main/model/user.py:22 ../main/templates/profile/profile.html:15
+#: ../main/templates/user/user_list.html:94
+msgid "Language"
+msgstr "Idioma"
+
+#: ../main/model/user.py:24 ../main/templates/user/user_list.html:37
+msgid "Active"
+msgstr "Activo"
+
+#: ../main/model/user.py:26 ../main/templates/user/user_list.html:44
+#: ../main/templates/user/user_list.html:95
+#: ../main/templates/user/user_merge.html:23
+msgid "Permissions"
+msgstr "Permisos"
+
+#: ../main/model/user.py:27 ../main/templates/user/user_list.html:31
+msgid "Verified"
+msgstr "Verificado"
+
+#: ../main/templates/error.html:8
+msgid "Oh no"
+msgstr "Oh no!"
+
+#: ../main/templates/error.html:10
+msgid ""
+"Maybe it's our fault.. maybe it's yours.. but either case, this page is "
+"unavailable!"
+msgstr "Tal vez es nuestra culpa, tal vez tuya... en cualquier caso, esta página no está disponible!"
+
+#: ../main/templates/feedback.html:6
+msgid "Any questions or suggestions are welcome"
+msgstr "Preguntas o sugerencias son bienvenidas"
+
+#: ../main/templates/feedback.html:19
+msgid "Send Feedback"
+msgstr "Enviar Comentarios"
+
+#: ../main/templates/welcome.html:7
+msgid "Hello, world!!"
+msgstr "Hola Mundo!!"
+
+#: ../main/templates/admin/admin.html:11
+msgid "Test"
+msgstr "Prueba"
+
+#: ../main/templates/admin/admin.html:15
+msgid "Models"
+msgstr "Modelos"
+
+#: ../main/templates/auth/auth.html:10
+msgid "It only takes 8 seconds"
+msgstr "Sólo toma 8 segundos"
+
+#: ../main/templates/auth/auth.html:22
+msgid "or"
+msgstr "ó"
+
+#: ../main/templates/auth/auth.html:27
+msgid "GAE"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:27 ../main/templates/auth/auth.html:34
+#: ../main/templates/macro/utils.html:81
+msgid "Google"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:28 ../main/templates/macro/utils.html:77
+msgid "Facebook"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:29 ../main/templates/macro/utils.html:95
+msgid "Twitter"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:30 ../main/templates/macro/utils.html:71
+msgid "Azure AD"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:31 ../main/templates/macro/utils.html:73
+msgid "Bitbucket"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:32 ../main/templates/macro/utils.html:75
+msgid "Dropbox"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:33 ../main/templates/macro/utils.html:79
+msgid "GitHub"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:35 ../main/templates/macro/utils.html:85
+msgid "Instagram"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:36 ../main/templates/macro/utils.html:87
+msgid "LinkedIn"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:37 ../main/templates/macro/utils.html:89
+msgid "Mail.Ru"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:38 ../main/templates/macro/utils.html:91
+msgid "Microsoft"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:39 ../main/templates/macro/utils.html:93
+msgid "Reddit"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:40
+msgid "VK"
+msgstr ""
+
+#: ../main/templates/auth/auth.html:41 ../main/templates/macro/utils.html:97
+msgid "Yahoo!"
+msgstr ""
+
+#: ../main/templates/auth/signin_form.html:17
+msgid "Forgot password?"
+msgstr "Olvidé mi contraseña"
+
+#: ../main/templates/auth/signin_form.html:18
+msgid "Create new account"
+msgstr "Crear cuenta"
+
+#: ../main/templates/auth/signup_form.html:14
+msgid "Already have an account?"
+msgstr "¿Ya tienes una cuenta?"
+
+#: ../main/templates/bit/footer.html:5
+msgid "Version"
+msgstr "Versión"
+
+#: ../main/templates/bit/footer.html:8
+msgid "View in JSON"
+msgstr "Ver JSON"
+
+#: ../main/templates/bit/header.html:5
+msgid "Toggle navigation"
+msgstr "Cambiar navegación"
+
+#: ../main/templates/bit/user_menu.html:9
+msgid "Profile"
+msgstr "Perfil"
+
+#: ../main/templates/bit/user_menu.html:15
+msgid "Sign out"
+msgstr "Salir"
+
+#: ../main/templates/macro/forms.html:17
+msgid "optional"
+msgstr "opcionlal"
+
+#: ../main/templates/macro/utils.html:40
+msgid "Prev Page"
+msgstr "Página Anterior"
+
+#: ../main/templates/macro/utils.html:43
+msgid "Next Page"
+msgstr "Siguiente Página"
+
+#: ../main/templates/macro/utils.html:83
+msgid "Google App Engine"
+msgstr ""
+
+#: ../main/templates/macro/utils.html:99
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: ../main/templates/profile/profile.html:10
+msgid "This email is verified"
+msgstr "Correo verificado"
+
+#: ../main/templates/profile/profile.html:12
+msgid "This email is not verified"
+msgstr "Correo no verificado"
+
+#: ../main/templates/profile/profile.html:17
+msgid "Available sign in options"
+msgstr "Opcines disponibles de inicio de sesión"
+
+#: ../main/templates/profile/profile_base.html:13
+msgid "Edit"
+msgstr "Editar"
+
+#: ../main/templates/profile/profile_base.html:19
+msgid "Set Password"
+msgstr "Definir contraseña"
+
+#: ../main/templates/profile/profile_base.html:21
+msgid "Change Password"
+msgstr "Cambiar Contraseña"
+
+#: ../main/templates/profile/profile_base.html:28
+msgid "Back to profile"
+msgstr "Volver al perfil"
+
+#: ../main/templates/profile/profile_base.html:37
+#: ../main/templates/user/user_update.html:39
+#, python-format
+msgid "Avatar of %(name)s"
+msgstr ""
+
+#: ../main/templates/profile/profile_base.html:40
+msgid "Change on"
+msgstr ""
+
+#: ../main/templates/profile/profile_base.html:40
+msgid "Gravatar"
+msgstr ""
+
+#: ../main/templates/profile/profile_update.html:13
+msgid "Update Profile"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:16
+msgid "Limit"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:25
+msgid "Admins"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:49
+msgid "Clear all permissions"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:55
+msgid "More"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:62
+msgid "Are you sure you want to delete {users} selected user(s)?"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:63
+msgid "{users} user(s) deleted."
+msgstr ""
+
+#: ../main/templates/user/user_list.html:64
+msgid "Something went wrong while deleting. Please try again."
+msgstr ""
+
+#: ../main/templates/user/user_list.html:68
+msgid "Delete Selected"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:74
+msgid "Merge Selected"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:83
+msgid "Remove all filters"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:84
+msgid "There are no users matching the filters."
+msgstr ""
+
+#: ../main/templates/user/user_list.html:93
+msgid "Modified"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:93
+#: ../main/templates/user/user_merge.html:22
+msgid "Created"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:96
+#: ../main/templates/user/user_merge.html:24
+#: ../main/templates/user/user_update.html:45
+msgid "Accounts"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:105
+#: ../main/templates/user/user_merge.html:32
+msgid "Avatar of"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:109
+#: ../main/templates/user/user_update.html:11
+msgid "You"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:136
+#: ../main/templates/user/user_merge.html:47
+msgid "admin"
+msgstr ""
+
+#: ../main/templates/user/user_list.html:139
+#: ../main/templates/user/user_merge.html:50
+msgid "inactive"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:9
+#: ../main/templates/user/user_update.html:8
+msgid "Back to user list"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:79
+msgid "Merged Accounts"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:84
+#: ../main/templates/user/user_update.html:53
+msgid "Auth ID"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:101
+msgid ""
+"Select the user's entity that you want to keep (the other entities will "
+"be deactivated)"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:102
+msgid ""
+"Before merging make sure the entities with references to the user are "
+"being taking care of"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:103
+msgid "For deactivated users the 3rd party associated accounts will be cleared"
+msgstr ""
+
+#: ../main/templates/user/user_merge.html:110
+msgid "Merge"
+msgstr ""
+
+#: ../main/templates/user/user_update.html:37
+msgid "Avatar"
+msgstr ""
+
+#: ../main/templates/user/user_update.html:47
+msgid "No associated accounts"
+msgstr ""
+
+#: ../main/templates/user/user_update.html:79
+msgid "Update"
+msgstr ""
+
+#: ../main/templates/user/user_update.html:81
+msgid "Create"
+msgstr ""
